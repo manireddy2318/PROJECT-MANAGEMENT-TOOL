@@ -1,0 +1,44 @@
+JAVA SCRIPT:
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost/social_media_db', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
+
+// Define MongoDB models for users, posts, tasks, etc.
+
+// Create API routes for user authentication, posts, tasks, etc.
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+
+Frontend (React.js):
+npx create-react-app social-media-frontend
+cd social-media-frontend
+npm start
+
+
+
+
